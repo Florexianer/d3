@@ -1,0 +1,88 @@
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<div style="display:flex; justify-content: space-between; align-items:center; width: 500px; margin: 60px auto auto;">
+    <a href="/">Home</a>
+    <a href="/flo">Flo</a>
+    <a href="/martin.html">Martin</a>
+    <a href="/hadi.html">Hadi</a>
+</div>
+<body>
+
+</body>
+
+<style>
+    #app {
+        font-family: Avenir, Helvetica, Arial, sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-align: center;
+        color: #2c3e50;
+        margin-top: 60px;
+    }
+
+    * {
+        font-family: Helvetica, Arial, sans-serif;
+    }
+</style>
+<script>
+    // Erstelle ein neues div-Element mit der ID "chart_div"
+    var chartDiv = document.createElement('div');
+    chartDiv.id = 'chart_div';
+    chartDiv.style.width = '900px';
+    chartDiv.style.height = '500px';
+    document.body.appendChild(chartDiv);
+
+    // Lade die Google Charts API-Bibliothek
+    google.charts.load('current', {'packages':['corechart']});
+
+    // Definiere die drawChart-Funktion, um das Diagramm zu zeichnen
+    function drawChart() {
+// Erstelle ein neues Datenarray
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Mitarbeiter');
+        data.addColumn('number', 'Stunden');
+        data.addColumn('number', 'Seiten');
+        data.addColumn('number', 'Wörter');
+
+        data.addRows([
+            ['Hadi', 21, 23, 3800],
+            ['Florian', 15, 19, 4400],
+            ['Martin', 20, 12, 3100]
+        ]);
+
+// Definiere die Diagrammoptionen
+        var options = {
+            title: 'Vergleich der Wörter und Seiten zu den benötigten Stunden für das Diplomarbeitsbuch',
+            hAxis: {
+                title: 'Mitarbeiter',
+                minValue: 0,
+            },
+            vAxes: {
+                0: {
+                    title: 'Stunden / Seiten',
+                    minValue: 0,
+                },
+                1: {
+                    title: 'Wörter',
+                    minValue: 0,
+                }
+            },
+            series: {
+                0: {targetAxisIndex: 0},
+                1: {targetAxisIndex: 0},
+                2: {targetAxisIndex: 1, type: 'scatter', pointSize: 10, color: '#00CED1'},
+            },
+            legend: { position: 'top', maxLines: 3 },
+            isStacked: true,
+            tooltip: {
+                trigger: 'both',
+                isHtml: true,
+            },
+        };
+
+// Erstelle ein neues Diagramm und zeichne es in das "chart_div"-Element
+        var chart = new google.visualization.ColumnChart(chartDiv);
+        chart.draw(data, options);
+    }
+    // Rufe die drawChart-Funktion auf, sobald die Google Charts API vollständig geladen ist
+    google.charts.setOnLoadCallback(drawChart);
+</script>

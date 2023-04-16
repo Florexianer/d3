@@ -1,0 +1,85 @@
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<div style="display:flex; justify-content: space-between; align-items:center; width: 500px; margin: 60px auto auto;">
+    <a href="/">Home</a>
+    <a href="/flo">Flo</a>
+    <a href="/martin.html">Martin</a>
+    <a href="/hadi.html">Hadi</a>
+</div>
+<br><br>
+<div id="chart_div"></div>
+
+<script>
+    google.charts.load('current', {'packages':['line', 'corechart']});
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+
+        var button = document.getElementById('change-chart');
+        var chartDiv = document.getElementById('chart_div');
+
+        var data = new google.visualization.DataTable();
+        data.addColumn('date', 'Monat');
+        data.addColumn('number', "Hadi");
+        data.addColumn('number', "Florian");
+        data.addColumn('number', "Martin");
+
+        data.addRows([
+            [new Date(2022, 6),       4.5, 	  	 5, 0],
+            [new Date(2022, 7),      11,    28.81, 3.82],
+            [new Date(2022, 8),  3.5,     4.13, 12.4],
+            [new Date(2022, 9), 17.166,     7.72, 9.25],
+            [new Date(2022, 10),     3,     11.3, 5],
+            [new Date(2022, 11), 5.166,     5.18, 10.27],
+            [new Date(2022, 12),   9.416,      4.5, 20.85],
+            [new Date(2023, 1),     12,    19.22, 18.33],
+        ]);
+
+        var materialOptions = {
+            chart: {
+                title: 'Arbeitsstunden der einzelnen Cashew-Mitglieder'
+            },
+            width: 900,
+            height: 500,
+            series: {
+                0: {
+                    lineWidth: 100
+                },
+                1: {
+                    lineWidth: 100
+                },
+                2: {
+                    lineWidth: 100
+                }
+            },
+            axes: {
+                y: {
+                    Stunden: {
+                        label: 'Stunden'
+                    }
+                }
+            },
+            colors: ['#FF0000', '#00FF00', '#0000FF']
+        };
+
+        function drawMaterialChart() {
+            var materialChart = new google.charts.Line(chartDiv);
+            materialChart.draw(data, materialOptions);
+        }
+        drawMaterialChart();
+    }
+</script>
+
+<style>
+    #app {
+        font-family: Avenir, Helvetica, Arial, sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-align: center;
+        color: #2c3e50;
+        margin-top: 60px;
+    }
+
+    * {
+        font-family: Helvetica, Arial, sans-serif;
+    }
+</style>
